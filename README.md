@@ -1,9 +1,9 @@
-# hackmit_puzzle2017
+# Solutions to admission puzzles for Hack MIT 2017
 
 ## Puzzle 4
 
 ### Problem
-URL: https://hotsinglebots.delorean.codes/u/USERNAME
+URL: https://hotsinglebots.delorean.codes/u/USERNAME <br />
 Need to get the puzzler bot to like you. From the console, we know that puzzler
 bots only like automobiles. Our goal is to upload a profile pic that the 
 neural network thinks is an automobile. In [username] file, it says, 
@@ -14,12 +14,12 @@ whereas the latter contains the weights of the neural network. We will use
 this model to generate an image that the neural network thinks it is a car.
 
 ### To-do
-Install keras and tensorflow
-Files are in allofkeras > keras > datasets
-Start with a mutation rate of 0.1 and then slow decreases the number
+Install keras and tensorflow <br />
+Files are in allofkeras > keras > datasets <br />
+Start with a mutation rate of 0.1 and then slow decreases the number <br />
 ```
 python3 big_genetic.py
 python3 image_converter.py
 ```
-Upload output.png as profile pic
+Upload output.png as profile pic <br />
 Like a puzzler bot and the date for the time machine will appear!
