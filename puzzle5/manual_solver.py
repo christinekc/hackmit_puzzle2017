@@ -1,10 +1,7 @@
+# Program for solving captchas. Solutions are saved to a solved.csv.
+
 import base64
-import cv2
-import numpy as np
-
 import json
-from pprint import pprint
-
 import PIL.Image
 import csv
 
@@ -29,80 +26,6 @@ for input_dict in data["images"]:
 	# Convert base 64 to png image
 	with open("temp.png", "wb") as fp:
 	    fp.write(base64.decodebytes(img_data))
-
-	# Convert to gray scale
-	img = cv2.imread('temp.png')
-	img_g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-	cv2.imwrite('temp_g.png', img_g)
-	# Convert image to Binary
-	thresh = 200
-	img_bw = cv2.threshold(img_g, thresh, 255, cv2.THRESH_BINARY)[1]
-	# Save
-	cv2.imwrite('temp_bw.png', img_bw)
-
-
-	image = PIL.Image.open('temp_bw.png')
-	width, height = image.size
-	data = image.load()
-
-	# for x in range(width):
-	# 	for y in range(height):
-
-	# 		# Only look at white pixels
-	# 		if data[x, y] != 0:
-
-	# 			count = 0
-
-	# 			# box of size 2
-	# 			if (x < width - 2) and (data[x+1, y] != 0) and (data[x+2, y] != 0):
-	# 				count += 1
-	# 			if (x > 1) and (data[x-1, y] != 0) and (data[x-2, y] != 0):
-	# 				count += 1
-	# 			if (y < height - 2) and (data[x, y+1] != 0) and (data[x, y+2] != 0): 
-	# 				count += 1
-	# 			if (y > 1) and (data[x, y-1] != 0) and (data[x, y-2] != 0):
-	# 				count += 1
-	# 			if (x < width - 1) and (y < height - 1) and (data[x+1, y+1] != 0):
-	# 				count += 1
-	# 			if (x > 0) and (y > 0) and (data[x-1, y-1] != 0):
-	# 				count += 1
-	# 			if (x > 0) and (y < height - 1) and (data[x-1, y+1] != 0):
-	# 				count += 1
-	# 			if (x < width - 1) and (y > 0) and (data[x+1, y-1] != 0):
-	# 				count += 1
-	# 			# set (x, y) as black
-	# 			if count < 4:
-	# 				data[x, y] = 0
-
-	for i in range(35):
-		for x in range(width):
-			for y in range(height):
-
-				# Only look at white pixels
-				if data[x, y] != 0:
-					count = 0
-					# box of size 1
-					if (x < width - 1) and (data[x+1, y] != 0):
-						count += 1
-					if (x > 0) and (data[x-1, y] != 0):
-						count += 1
-					if (y < height - 1) and (data[x, y+1] != 0): 
-						count += 1
-					if (y > 0) and (data[x, y-1] != 0):
-						count += 1
-					if (x < width - 1) and (y < height - 1) and (data[x+1, y+1] != 0):
-						count += 1
-					if (x > 0) and (y > 0) and (data[x-1, y-1] != 0):
-						count += 1
-					if (x > 0) and (y < height - 1) and (data[x-1, y+1] != 0):
-						count += 1
-					if (x < width - 1) and (y > 0) and (data[x+1, y-1] != 0):
-						count += 1
-					# set (x, y) as black
-					if count < 4:
-						data[x, y] = 0
-
-	image.save('tmp_cleaned.png')
 
 	solution = input('Solve captcha #' + str(counter) + ': ')
 	# skip if input is s
